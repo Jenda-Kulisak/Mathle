@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+#background {
+  display: block;
+  margin: auto;
+  scale: 1.2;
+  opacity: 0.5;
+  position: absolute;
+}
+
+div, button, h1, h2, p {
+  position: relative;
+  z-index: 100;
+}
 
 table {
   margin: auto;
@@ -39,18 +51,20 @@ body {
 
 
 #popup{
+  overflow: hidden;
   font-size: 35px;
   outline: none;
-  display: center;
-  border: solid rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
   justify-content: center;
   width: 300px;
-  height: 45px;
+  height: 55px;
   border-radius: 25px;
-  margin-top: 10px;
+  margin-top: 15px;
+  border: solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   background-color: rgb(27, 27, 27);
-  
+}
+#popup p {
+  margin-top: -15px;
 }
 
 #custom_game {
@@ -177,7 +191,7 @@ border: 3px solid white;
 
   .locked {
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.6;
     border: none;
     
   }

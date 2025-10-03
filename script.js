@@ -328,13 +328,13 @@ function Game() {
 
         if (win) {
             istats.wins++;
-            dialog.innerText = "Player Won"
+            dialog.innerHTML = '<p class="dtext">Player Won <br> Click To Return</p>';
         }
         else {
             istats.losses++;
             ag.style.display = "block";
             kb.style.display = "none"
-            dialog.innerText = "Player Lost"
+            dialog.innerHTML = '<p class="dtext">Player Lost <br> Click To Return</p>';
         }
         dialog.showModal()
         localStorage.setItem("istats", JSON.stringify(istats))
@@ -471,7 +471,7 @@ function Game() {
         signs.push(stringed)
 
         answer = stringed.split("");
-        //console.log(answer);
+        console.log(answer);
     }
     function WriteIntoJson() {
         console.log("writeintojson activated")
