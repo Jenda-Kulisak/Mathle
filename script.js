@@ -157,11 +157,19 @@ function Game() {
         cell.addEventListener("keydown", (e) => {
             const cll = grid.querySelectorAll(".cell")
             e.preventDefault();
-            if (e.key.length == 1)
-                e.target.innerText = e.key;
-            if (e.key === "Alt" || e.key === "Shift" || e.key === "AltGraph" || e.key === "Control") {
+
+            const forbidden = /^[a-zA-ZěščřžýáíéůúóťďňĺľĚŠČŘŽÝÁÍÉŮÚÓŤĎŇĹĽ'";°¨§,.]$/;
+            if (forbidden.test(e.key)) {
                 return;
             }
+
+            if (e.key.length == 1)
+                e.target.innerText = e.key;
+
+            if (e.key === "Alt" || e.key === "Shift" || e.key === "AltGraph" || e.key === "Control" || e.key === "CapsLock") {
+                return;
+            }
+
 
 
             if (e.key === "Enter") {
