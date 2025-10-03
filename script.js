@@ -12,7 +12,7 @@ const istatscreate = {
     completed: 0,
     wins: 0,
     losses: 0,
-    on: new Array([0, 0, 0, 0, 0, 0])
+    on: [0, 0, 0, 0, 0, 0]
 };
 
 let istats = new Object(istatscreate);
@@ -23,7 +23,6 @@ if (localStorage.getItem("istats") != null)
 console.log(istats)
 
 for (let i = 0; i < 6; i++) {
-    console.log(i)
     if (istats.on[i] == undefined || istats.on[i] == null)
         istats.on[i] = 0;
 }

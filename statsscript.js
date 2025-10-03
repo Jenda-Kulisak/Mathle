@@ -7,7 +7,7 @@ const istatscreate = {
     completed: 0,
     wins: 0,
     losses: 0,
-    on: new Array([0, 0, 0, 0, 0, 0])
+    on: [0, 0, 0, 0, 0, 0]
 };
 let istats = Object.create(istatscreate);
 if (localStorage.getItem("istats") != null)
