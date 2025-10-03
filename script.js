@@ -28,6 +28,8 @@ for (let i = 0; i < 6; i++) {
         istats.on[i] = 0;
 }
 
+console.log(istats)
+
 kb.style.display = "none";
 grid.style.display = "none";
 ag.style.display = "none";
