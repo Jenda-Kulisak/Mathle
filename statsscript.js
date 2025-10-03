@@ -26,9 +26,6 @@ for (let i = 0; i < rows; i++) {
     const child1 = document.createElement("td");
     const child2 = document.createElement("td");
     child2.style.width = "80px";
-    if (i == 3) {
-        row.style.marginTop = "20px";
-    }
 
     child1.innerText = nazvy[i];
     child2.innerText = values[i];

@@ -38,7 +38,7 @@ console.log(todaydate + " - " + new Date().toLocaleDateString());
 
 if (todaydate == new Date().toLocaleDateString()) {
     dc.style.display = "block";
-    dg.style.opacity = 0.5;
+    dg.style.opacity = 0.7;
     dg.style.pointerEvents = 'none';
     if (cookiesindividual[0] == "false") {
         dc.innerText = "Daily Challange Failed";
@@ -111,7 +111,7 @@ function Game() {
                 for (let i = 0; i < answer.length; i++) {
                     stringed = stringed + answer[i];
                 }
-                //console.log(answer);
+                console.log(answer);
             })
 
         gt.innerText = `Daily Challenge: ${today.toLocaleDateString()}`
