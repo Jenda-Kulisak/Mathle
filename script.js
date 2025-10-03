@@ -16,11 +16,8 @@ const istatscreate = {
 };
 
 let istats = new Object(istatscreate);
-console.log(localStorage.getItem("istats"))
 if (localStorage.getItem("istats") != null)
     istats = JSON.parse(localStorage.getItem("istats"));
-
-console.log(istats)
 
 for (let i = 0; i < 6; i++) {
     if (istats.on[i] == undefined || istats.on[i] == null)
@@ -49,7 +46,6 @@ if (todaydate == new Date().toLocaleDateString()) {
     }
 }
 stats.addEventListener("click", (click) => {
-    console.log("clicked")
     window.location.href = "stats.html";
 })
 
@@ -115,8 +111,7 @@ function Game() {
                 for (let i = 0; i < answer.length; i++) {
                     stringed = stringed + answer[i];
                 }
-                console.log(stringed);
-                console.log(answer);
+                //console.log(answer);
             })
 
         gt.innerText = `Daily Challenge: ${today.toLocaleDateString()}`
@@ -244,7 +239,6 @@ function Game() {
     const keys = kb.querySelectorAll(".key");
 
     function reveal() {
-        console.log(answer);
         if (unlockedCells <= rows * cols) {
             for (let i = 0; i < cells.length; i++) {
                 if (i + 1 <= unlockedCells)
@@ -469,7 +463,7 @@ function Game() {
         signs.push(stringed)
 
         answer = stringed.split("");
-        console.log(answer);
+        //console.log(answer);
     }
     function WriteIntoJson() {
         console.log("writeintojson activated")
