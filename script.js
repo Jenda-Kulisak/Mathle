@@ -20,7 +20,10 @@ console.log(localStorage.getItem("istats"))
 if (localStorage.getItem("istats") != null)
     istats = JSON.parse(localStorage.getItem("istats"));
 
+console.log(istats)
+
 for (let i = 0; i < 6; i++) {
+    console.log(i)
     if (istats.on[i] == undefined || istats.on[i] == null)
         istats.on[i] = 0;
 }
