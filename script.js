@@ -195,7 +195,14 @@ function Game() {
                     }
                 }
                 else {
-                    alert("Your math doesn't check out")
+
+                    const elements = grid.querySelectorAll(':scope > *:not(.locked):not(.filled)');
+                    elements.forEach(el => {
+                        el.style.animation = 'none';
+                        void el.offsetWidth;
+                        el.style.animation = 'wrong 0.1s';
+                    });
+
                     return;
                 }
             }
@@ -306,6 +313,7 @@ function Game() {
             }
 
             for (let i = unlockedCells - (cols * 2); i < unlockedCells - cols; i++) {
+                void cells[i].offsetWidth;
                 cells[i].classList.add('ended');
             }
             win = true;
