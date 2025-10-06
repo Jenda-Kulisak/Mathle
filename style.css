@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+
+#phoneborder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 720px;
+  height: 1280px;
+  outline: 2px solid red;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
 #background {
   width: auto;
   display: block;
@@ -7,6 +19,7 @@
   scale: 1.2;
   opacity: 0.5;
   position: absolute;
+  background-size: cover;
 }
 
 div, button, h1, h2, p {
@@ -47,13 +60,11 @@ body {
   color: #fafafa;
  text-align: center;
   margin-top: 40px;
-  overflow: hidden;
 
 
 
 
 #popup{
-  overflow: hidden;
   font-size: 35px;
   outline: none;
   justify-content: center;

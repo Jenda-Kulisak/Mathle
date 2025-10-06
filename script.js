@@ -125,7 +125,7 @@ function Game() {
 
     grid.style.gridTemplateColumns = `repeat(${cols}, 65px)`;
     grid.style.gridTemplateRows = `repeat(${rows}, 55px)`;
-    kb.style.gridTemplateColumns = `repeat(${15}, 20px)`;
+    kb.style.gridTemplateColumns = `repeat(${8}, 20px)`;
     kb.style.gridTemplateRows = `repeat(${1}, 20px)`;
     ag.style.gridTemplateColumns = `repeat(${cols}, 20px)`;
     ag.style.gridTemplateRows = `repeat(${1}, 20px)`;
