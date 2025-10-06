@@ -173,38 +173,8 @@ function Game() {
 
 
             if (e.key === "Enter") {
-                let userInput = "";
-                for (let i = unlockedCells - cols; i < unlockedCells; i++) {
-                    userInput = userInput + cll[i].innerText;
-                }
-                const [s1, s2] = userInput.split("=");
-                if (eval(s1) == Number(s2)) {
-
-                    let something = 0;
-                    for (let i = 0; i < cols; i++) {
-                        if (cll[i + unlockedCells - cols].innerText != "")
-                            something++;
-                    }
-                    if (something == cols) {
-                        if (attempt < rows - 1) {
-                            cll[unlockedCells].focus()
-                            activecell = unlockedCells;
-                        }
-                        unlockedCells += 8;
-                        reveal();
-                    }
-                }
-                else {
-
-                    const elements = grid.querySelectorAll(':scope > *:not(.locked):not(.filled)');
-                    elements.forEach(el => {
-                        el.style.animation = 'none';
-                        void el.offsetWidth;
-                        el.style.animation = 'wrong 0.1s';
-                    });
-
-                    return;
-                }
+                Enter()
+                return;
             }
 
             if (e.key === "ArrowLeft") {
@@ -230,27 +200,67 @@ function Game() {
     document.getElementById("bgrid").append(copygrid);
 
     // keyboard
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 16; i++) {
         let key = document.createElement("div");
         key.classList.add("key");
-        let keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "+", "-", "*", "/", "="];
+        let keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "+", "-", "*", "/", "=", "¶"];
         key.tabIndex = 0;
         key.contentEditable = "false";
         key.innerText = keyboard[i];
         kb.appendChild(key);
         key.addEventListener("click", (click) => {
-            cells[activecell].innerText = key.innerText;
-
-            if ((activecell + 1) % cols != 0) {
-                activecell++;
-                cells[activecell].focus();
+            if (key.innerText != "¶")
+                cells[activecell].innerText = key.innerText;
+            else {
+                Enter();
             }
+
+            if ((activecell + 1) % cols != 0 && key.innerText != "¶") {
+                activecell++;
+            }
+            cells[activecell].focus();
         })
-
-
-
-
     }
+
+    function Enter() {
+        {
+            let userInput = "";
+            for (let i = unlockedCells - cols; i < unlockedCells; i++) {
+                userInput = userInput + cells[i].innerText;
+            }
+            const [s1, s2] = userInput.split("=");
+            if (eval(s1) == Number(s2)) {
+
+                let something = 0;
+                for (let i = 0; i < cols; i++) {
+                    if (cells[i + unlockedCells - cols].innerText != "")
+                        something++;
+                }
+                if (something == cols) {
+                    if (attempt < rows - 1) {
+                        cells[unlockedCells].focus()
+                        activecell = unlockedCells;
+                    }
+                    unlockedCells += 8;
+                    reveal();
+                }
+            }
+            else {
+
+                const elements = grid.querySelectorAll(':scope > *:not(.locked):not(.filled)');
+                elements.forEach(el => {
+                    el.style.animation = 'none';
+                    void el.offsetWidth;
+                    el.style.animation = 'wrong 0.1s';
+
+                });
+
+                return;
+            }
+        }
+    }
+
+
     const keys = kb.querySelectorAll(".key");
 
     function reveal() {
@@ -314,6 +324,7 @@ function Game() {
 
             for (let i = unlockedCells - (cols * 2); i < unlockedCells - cols; i++) {
                 void cells[i].offsetWidth;
+                cells[i].style.animation = "";
                 cells[i].classList.add('ended');
             }
             win = true;

@@ -60,6 +60,7 @@ body {
   color: #fafafa;
  text-align: center;
   margin-top: 40px;
+  overflow:hidden;
 
 
 
@@ -75,6 +76,8 @@ body {
   border: solid rgb(255, 255, 255);
   color: rgb(255, 255, 255);
   background-color: rgb(27, 27, 27);
+  overflow: hidden;
+
 }
 #popup p {
   margin-top: -15px;
@@ -90,6 +93,7 @@ body {
   justify-content: center;
   border-radius: 20px;
   background-color: rgb(34, 34, 34);
+  display: inline-block;
 }
 #custom_game:hover  {
   scale: 1.02;
@@ -99,6 +103,7 @@ border: 3px solid white;
 }
 
 #daily_game {
+  display: inline-block;
   border: 1px solid rgb(223, 223, 223);
   margin-top: 0px;
   width: 300px;
@@ -118,6 +123,7 @@ border: 3px solid white;
 }
 
 #stats {
+  margin: auto;
   border: 1px solid rgb(223, 223, 223);
   position: flex;
   margin-top: 20px;
@@ -145,6 +151,7 @@ border: 3px solid white;
     display: grid;
     gap: 10px;
     justify-content: center;
+    margin-top: -5px;
     row-gap: 20px;
     column-gap: 15px;
   }
