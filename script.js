@@ -123,8 +123,8 @@ function Game() {
     const rows = 6;
     const cols = 8;
 
-    grid.style.gridTemplateColumns = `repeat(${cols}, 65px)`;
-    grid.style.gridTemplateRows = `repeat(${rows}, 55px)`;
+    grid.style.gridTemplateColumns = `repeat(${cols}, clamp(35px, 10vw, 60px))`;
+    grid.style.gridTemplateRows = `repeat(${rows}, clamp(35px, 10vw, 60px))`;
     kb.style.gridTemplateColumns = `repeat(${8}, 20px)`;
     kb.style.gridTemplateRows = `repeat(${1}, 20px)`;
     ag.style.gridTemplateColumns = `repeat(${cols}, 20px)`;
