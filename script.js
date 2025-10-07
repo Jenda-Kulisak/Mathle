@@ -163,8 +163,10 @@ function Game() {
                 return;
             }
 
-            if (e.key.length == 1)
+            if (e.key.length == 1) {
                 e.target.innerText = e.key;
+                e.target.textContent = e.key;
+            }
 
             if (e.key === "Alt" || e.key === "Shift" || e.key === "AltGraph" || e.key === "Control" || e.key === "CapsLock") {
                 return;
@@ -209,8 +211,11 @@ function Game() {
         key.innerText = keyboard[i];
         kb.appendChild(key);
         key.addEventListener("click", (click) => {
-            if (key.innerText != "¶")
+            if (key.innerText != "¶") {
                 cells[activecell].innerText = key.innerText;
+                cells[activecell].textContent = key.innerText;
+            }
+
             else {
                 Enter();
             }
