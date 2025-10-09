@@ -146,6 +146,13 @@ function Game() {
             cell.classList.add('locked');
         grid.appendChild(cell);
 
+        cell.addEventListener('touchstart', (e) => {
+            if (Math.floor(i / cols) == unlockedRow) {
+                cell.focus();
+            }
+            e.preventDefault();
+        });
+
         cell.addEventListener("click", (click) => {
             if (Math.floor(i / cols) != unlockedRow) {
                 click.preventDefault();
