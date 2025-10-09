@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+html {
+  margin-top: 15px;
+}
+
 #phoneborder {
   position: absolute;
   top: 50%;
@@ -102,7 +106,6 @@ body {
   color: white;
   justify-content: center;
   border-radius: 20px;
-  background-color: rgb(34, 34, 34);
   display: inline-block;
   cursor: pointer;
   -webkit-user-select: none;
@@ -112,7 +115,6 @@ body {
 #custom_game:hover {
   scale: 1.02;
   transition: 0.2s;
-  background-color: rgb(49, 49, 49);
   border: 3px solid white;
 }
 
@@ -126,7 +128,6 @@ body {
   color: white;
   justify-content: center;
   border-radius: 20px;
-  background-color: rgb(34, 34, 34);
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
@@ -135,7 +136,6 @@ body {
 #daily_game:hover {
   scale: 1.02;
   transition: 0.2s;
-  background-color: rgb(49, 49, 49);
   border: 3px solid white;
 }
 
@@ -151,7 +151,6 @@ body {
   justify-content: center;
   background-color: #121212;
   border-radius: 20px;
-  background-color: rgb(34, 34, 34);
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
@@ -160,7 +159,6 @@ body {
 #stats:hover {
   scale: 1.02;
   transition: 0.2s;
-  background-color: rgb(49, 49, 49);
   border: 3px solid white;
 }
 
@@ -188,7 +186,7 @@ body {
 }
   
 .key {
-  border: 2px solid rgb(0, 170, 212);
+  border: 2px solid rgb(255, 255, 255);
   width: clamp(35px, 8vw, 40px);
   height: clamp(42px, 9vw, 50px);
   justify-content: center;
@@ -196,18 +194,13 @@ body {
   border-radius: 5px;
   display: flex;
   place-items: center;
-  background-color: rgba(36, 97, 102, 0.8);
+  background-color: rgba(101, 185, 193, 0.8);
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
   touch-action: manipulation;
 }
 
-.key:hover {
-  scale: 1.1;
-  border: 2px solid rgb(0, 204, 255);
-  background-color: rgb(46, 124, 131);
-}
 
 .cell {
   transition: transform 0.1s, border 0.1s;
@@ -275,3 +268,23 @@ body {
     transform: translateX(-6px);
   }
 }
+
+#custom_game, #daily_game, #stats {
+  transition: 0.5s;
+  background: linear-gradient(28deg,rgb(132, 188, 188) 0%, rgba(156, 244, 236, 0.664) 29%, rgba(255, 255, 255, 0.82) 100%);}
+
+#custom_game:hover, #daily_game:hover, #stats:hover {
+  transition: 0.5s;
+  background: linear-gradient(28deg,rgba(130, 229, 229, 0.66) 0%, rgba(113, 215, 207, 0.825) 29%, rgb(255, 255, 255) 100%);}
+
+.cell, th, td {
+  background: linear-gradient(28deg,rgb(139, 139, 139) 0%, rgb(176, 176, 176) 40%, rgba(255, 255, 255, 0.811) 100%);}
+
+.key {
+  background: linear-gradient(28deg,rgba(139, 139, 139, 0.803) 0%, rgba(176, 176, 176, 0.781) 40%, rgba(255, 255, 255, 0.759) 100%);}
+
+  .key:hover {
+    scale: 1.1;
+    background: linear-gradient(28deg,rgb(139, 139, 139) 0%, rgb(176, 176, 176) 40%, rgb(255, 255, 255) 100%);}
+
+

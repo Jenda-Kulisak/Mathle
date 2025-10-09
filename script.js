@@ -165,16 +165,14 @@ function Game() {
 
             if (e.key.length == 1) {
                 e.target.innerText = e.key;
-                setTimeout(() => {
-                    if (e.target.innerText.length > 1) {
-                        e.target.innerText = e.target.innerText.slice(-1);
-                    }
-                }, 0);
+                e.target.textContent = e.key;
             }
 
             if (e.key === "Alt" || e.key === "Shift" || e.key === "AltGraph" || e.key === "Control" || e.key === "CapsLock") {
                 return;
             }
+
+
 
             if (e.key === "Enter") {
                 Enter()
