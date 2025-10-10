@@ -152,6 +152,8 @@ function Game() {
 
         if (isMobileDevice()) {
             cell.contentEditable = "false";
+            document.querySelectorAll('input.mobile-no-keyboard, textarea.mobile-no-keyboard')
+                .forEach(el => el.setAttribute('readonly', 'readonly'));
             cell.setAttribute('data-mobile-lock', 'true');
         }
 
@@ -571,6 +573,6 @@ function Game() {
 }
 
 function isMobileDevice() {
-    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 }
 
