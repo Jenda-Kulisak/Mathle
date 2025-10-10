@@ -151,9 +151,6 @@ function Game() {
             cell.classList.add('locked');
 
         if (isMobileDevice()) {
-            cell.contentEditable = "false";
-            document.querySelectorAll('input.mobile-no-keyboard, textarea.mobile-no-keyboard')
-                .forEach(el => el.setAttribute('readonly', 'readonly'));
             cell.setAttribute('data-mobile-lock', 'true');
         }
 
