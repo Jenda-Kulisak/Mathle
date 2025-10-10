@@ -296,8 +296,10 @@ function Game() {
             for (let i = 0; i < cells.length; i++) {
                 if (i + 1 <= unlockedCells)
                     cells[i].classList.remove('locked');
-                if (i < unlockedCells - cols)
+                if (i < unlockedCells - cols) {
                     cells[i].classList.add('filled');
+                    cells[i].contentEditable = "false";
+                }
             }
         }
 
@@ -353,12 +355,14 @@ function Game() {
         if (greens == cols) {
             for (let i = 0; i < cols * rows; i++) {
                 cells[i].classList.add('locked');
+                cells[i].contentEditable = "false";
             }
 
             for (let i = unlockedCells - (cols * 2); i < unlockedCells - cols; i++) {
                 void cells[i].offsetWidth;
                 cells[i].style.animation = "";
                 cells[i].classList.add('ended');
+                cells[i].contentEditable = "false";
             }
             win = true;
             endscreen()
