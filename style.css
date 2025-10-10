@@ -173,7 +173,7 @@ body {
   margin: 20px auto;
   row-gap: clamp(15px, 3vw, 20px);
   column-gap: clamp(12px, 2.5vw, 15px);
-  width: 90%;
+  width: 80%;
 }
 #agrid {
   display: none;

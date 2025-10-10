@@ -149,6 +149,10 @@ function Game() {
         cell.contentEditable = "true";
         if (i + 1 > unlockedCells)
             cell.classList.add('locked');
+        if (isMobileDevice()) {
+            cell.setAttribute('readonly', true)
+        }
+
         grid.appendChild(cell);
 
         cell.addEventListener("click", (click) => {
