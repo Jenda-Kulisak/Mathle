@@ -7,6 +7,9 @@ const gt = document.getElementById("game_text");
 const dc = document.getElementById("daily_completed");
 const stats = document.getElementById("stats");
 const ag = document.getElementById("answer_grid");
+const mt = document.getElementById("mathle");
+const agrid = document.getElementById("agrid")
+
 
 const istatscreate = {
     completed: 0,
@@ -51,7 +54,6 @@ stats.addEventListener("click", (click) => {
 
 Game()
 function Game() {
-
 
     let numbers1;
     let numbers2;
@@ -112,6 +114,7 @@ function Game() {
                     stringed = stringed + answer[i];
                 }
                 console.log(answer);
+                Ansgrid()
             })
 
         gt.innerText = `Daily Challenge: ${today.toLocaleDateString()}`
@@ -125,6 +128,8 @@ function Game() {
 
     grid.style.gridTemplateColumns = `repeat(${cols}, clamp(35px, 10vw, 60px))`;
     grid.style.gridTemplateRows = `repeat(${rows}, clamp(35px, 10vw, 60px))`;
+    agrid.style.gridTemplateColumns = `repeat(${cols}, clamp(35px, 10vw, 60px))`;
+    agrid.style.gridTemplateRows = `repeat(${1}, clamp(35px, 10vw, 60px))`;
     kb.style.gridTemplateColumns = `repeat(${8}, 20px)`;
     kb.style.gridTemplateRows = `repeat(${1}, 20px)`;
     ag.style.gridTemplateColumns = `repeat(${cols}, 20px)`;
@@ -146,13 +151,6 @@ function Game() {
             cell.classList.add('locked');
         grid.appendChild(cell);
 
-        cell.addEventListener('touchstart', (e) => {
-            if (Math.floor(i / cols) == unlockedRow) {
-                cell.focus();
-            }
-            e.preventDefault();
-        });
-
         cell.addEventListener("click", (click) => {
             if (Math.floor(i / cols) != unlockedRow) {
                 click.preventDefault();
@@ -162,6 +160,10 @@ function Game() {
             cell.focus();
         })
         cell.addEventListener("keydown", (e) => {
+            if (isMobileDevice()) {
+                preventDefault()
+                return;
+            }
             const cll = grid.querySelectorAll(".cell")
             e.preventDefault();
 
@@ -208,6 +210,7 @@ function Game() {
     let copygrid = grid.cloneNode(true);
     document.getElementById("bgrid").append(copygrid);
 
+
     // keyboard
     for (let i = 0; i < 16; i++) {
         let key = document.createElement("div");
@@ -218,9 +221,10 @@ function Game() {
         key.innerText = keyboard[i];
         kb.appendChild(key);
         key.addEventListener("click", (click) => {
+            click.preventDefault()
             if (key.innerText != "¶") {
+                console.log(key.innerText)
                 cells[activecell].innerText = key.innerText;
-                cells[activecell].textContent = key.innerText;
             }
 
             else {
@@ -232,6 +236,19 @@ function Game() {
             }
             cells[activecell].focus();
         })
+    }
+
+    //answer grid
+    function Ansgrid() {
+        for (let i = 0; i < cols; i++) {
+            let cell = document.createElement("div")
+            cell.classList.add("cell")
+            cell.tabIndex = 0;
+            cell.innerText = answer[i];
+            cell.style.background = "none";
+            cell.style.backgroundColor = "red";
+            agrid.appendChild(cell)
+        }
     }
 
     function Enter() {
@@ -304,19 +321,23 @@ function Game() {
         for (let i = unlockedCells - (2 * cols); i < unlockedCells; i++) {
             if (matches[i] == 1) {
                 greens++;
+                cells[i].style.background = "none";
                 cells[i].style.backgroundColor = "green";
 
                 for (let j = 0; j < keys.length; j++) {
                     if (cells[i].innerText == keys[j].innerText) {
+                        keys[j].style.background = "none";
                         keys[j].style.backgroundColor = "green";
                     }
                 }
             }
             else if (matches[i] == 2) {
+                cells[i].style.background = "none";
                 cells[i].style.backgroundColor = "purple";
 
                 for (let j = 0; j < keys.length; j++) {
                     if (cells[i].innerText == keys[j].innerText && keys[j].style.backgroundColor != "green") {
+                        keys[j].style.background = "none";
                         keys[j].style.backgroundColor = "purple";
                     }
                 }
@@ -324,6 +345,7 @@ function Game() {
             else if (matches[i] == 0) {
                 for (let j = 0; j < keys.length; j++) {
                     if (cells[i].innerText == keys[j].innerText) {
+                        keys[j].style.background = "none";
                         keys[j].style.backgroundColor = "red";
                     }
                 }
@@ -346,6 +368,8 @@ function Game() {
             endscreen()
     }
     function endscreen() {
+        mt.style.display = "none";
+        agrid.style.display = "grid";
         console.log(istats);
         istats.completed++;
         if (win) {
@@ -503,6 +527,7 @@ function Game() {
 
         answer = stringed.split("");
         console.log(answer);
+        Ansgrid()
     }
     function WriteIntoJson() {
         console.log("writeintojson activated")
@@ -540,5 +565,9 @@ function Game() {
 
     }
 
+}
+
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 

@@ -166,18 +166,21 @@ body {
   font-style: italic;
 } 
 
-#grid {
+#grid, #agrid {
   display: grid;
   gap: clamp(8px, 2vw, 10px);
   justify-content: center;
   margin: 20px auto;
   row-gap: clamp(15px, 3vw, 20px);
   column-gap: clamp(12px, 2.5vw, 15px);
-  width: fit-content;
+  width: 90%;
+}
+#agrid {
+  display: none;
 }
 
 #keyboard {
-  margin-top: 40px;
+  margin-top: 20px;
   display: grid;
   gap: clamp(25px, 5vw, 35px);
   row-gap: clamp(35px, 7vw, 50px);
