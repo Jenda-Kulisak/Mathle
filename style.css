@@ -168,7 +168,7 @@
     margin: 20px auto;
     row-gap: clamp(15px, 3vw, 20px);
     column-gap: clamp(12px, 2.5vw, 15px);
-    max-width: 100%;
+    max-width: 80%;
     padding: 0 5px;
   }
 #grid {
