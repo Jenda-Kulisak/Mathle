@@ -149,8 +149,10 @@ function Game() {
         cell.contentEditable = "true";
         if (i + 1 > unlockedCells)
             cell.classList.add('locked');
+
         if (isMobileDevice()) {
-            cell.setAttribute('readonly', true)
+            cell.contentEditable = "false";
+            cell.setAttribute('data-mobile-lock', 'true');
         }
 
         grid.appendChild(cell);
@@ -210,9 +212,6 @@ function Game() {
         })
     }
     const cells = grid.querySelectorAll(".cell");
-
-    let copygrid = grid.cloneNode(true);
-    document.getElementById("bgrid").append(copygrid);
 
 
     // keyboard

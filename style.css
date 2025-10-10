@@ -46,12 +46,6 @@ table {
   border-spacing: 10px;
 }
 
-#bgrid #grid {
-  opacity: 0.3;
-  position: relative;
-  margin-top: -500px;
-}
-
 th, td {
   padding: 5px;
   background-color: rgb(107, 107, 107);
@@ -173,6 +167,7 @@ body {
   margin: 20px auto;
   row-gap: clamp(15px, 3vw, 20px);
   column-gap: clamp(12px, 2.5vw, 15px);
+  max-width: 90vw;
   width: 80%;
 }
 #agrid {
