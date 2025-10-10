@@ -143,8 +143,10 @@ function Game() {
         cell.classList.add("cell");
         cell.tabIndex = 0;
         cell.contentEditable = "true";
-        if (i + 1 > unlockedCells)
+        if (i + 1 > unlockedCells) {
             cell.classList.add('locked');
+            cell.contentEditable = "false";
+        }
 
         if (isMobileDevice()) {
             cell.setAttribute('data-mobile-lock', 'true');
@@ -294,8 +296,10 @@ function Game() {
     function reveal() {
         if (unlockedCells <= rows * cols) {
             for (let i = 0; i < cells.length; i++) {
-                if (i + 1 <= unlockedCells)
+                if (i + 1 <= unlockedCells) {
                     cells[i].classList.remove('locked');
+                    cells[i].contentEditable = "true";
+                }
                 if (i < unlockedCells - cols) {
                     cells[i].classList.add('filled');
                     cells[i].contentEditable = "false";
