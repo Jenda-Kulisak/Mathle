@@ -78,8 +78,8 @@
     font-size: clamp(24px, 5vw, 35px);
     outline: none;
     justify-content: center;
-    width: clamp(250px, 80vw, 300px);
-    height: clamp(45px, 8vw, 55px);
+    width: clamp(200px, 80vw, 350px);
+    height: clamp(135px, 8vw, 200px);
     border-radius: 25px;
     margin-top: 15px;
     border: solid rgb(255, 255, 255);
@@ -161,8 +161,8 @@
     font-style: italic;
   } 
 
+
   #grid, #agrid {
-    display: grid;
     gap: clamp(8px, 2vw, 10px);
     justify-content: center;
     margin: 20px auto;
@@ -171,6 +171,10 @@
     max-width: 100%;
     padding: 0 5px;
   }
+#grid {
+  display: grid;
+}
+
   #agrid {
     display: none;
   }
@@ -202,13 +206,12 @@
     touch-action: manipulation;
   }
 
-
   .cell {
+    display: flex;
     transition: transform 0.1s, border 0.1s;
     width: clamp(45px, 9vw, 60px);
     height: clamp(45px, 9vw, 60px);
     border: 2px solid rgb(230, 230, 230);
-    display: flex;
     justify-content: center;
     align-items: center;
     font-size: clamp(22px, 5vw, 30px);

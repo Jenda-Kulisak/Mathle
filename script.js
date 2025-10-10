@@ -6,7 +6,6 @@ const dg = document.getElementById("daily_game");
 const gt = document.getElementById("game_text");
 const dc = document.getElementById("daily_completed");
 const stats = document.getElementById("stats");
-const ag = document.getElementById("answer_grid");
 const mt = document.getElementById("mathle");
 const agrid = document.getElementById("agrid")
 
@@ -31,7 +30,6 @@ console.log(istats)
 
 kb.style.display = "none";
 grid.style.display = "none";
-ag.style.display = "none";
 let cookies = document.cookie;
 let cookiesindividual = cookies.split(" ", 1)
 let todaydate = cookies.split(cookiesindividual[0] + " ")[1]
@@ -132,8 +130,6 @@ function Game() {
     agrid.style.gridTemplateRows = `repeat(${1}, clamp(35px, 10vw, 60px))`;
     kb.style.gridTemplateColumns = `repeat(${8}, 20px)`;
     kb.style.gridTemplateRows = `repeat(${1}, 20px)`;
-    ag.style.gridTemplateColumns = `repeat(${cols}, 20px)`;
-    ag.style.gridTemplateRows = `repeat(${1}, 20px)`;
 
 
 
@@ -251,6 +247,7 @@ function Game() {
             cell.style.backgroundColor = "red";
             agrid.appendChild(cell)
         }
+        agrid.style.display = "none";
     }
 
     function Enter() {
@@ -371,7 +368,7 @@ function Game() {
     }
     function endscreen() {
         mt.style.display = "none";
-        agrid.style.display = "grid";
+        agrid.style.display = "none";
         console.log(istats);
         istats.completed++;
         if (win) {
@@ -384,12 +381,17 @@ function Game() {
         }
 
         if (win) {
+            console.log("WON")
             istats.wins++;
             dialog.innerHTML = '<p class="dtext">Player Won <br> Click To Return</p>';
+            if (attempt == 1)
+                dialog.style.marginTop = "150px";
+            agrid.style.display = "none";
         }
         else {
+            console.log("LOST")
             istats.losses++;
-            ag.style.display = "block";
+            agrid.style.display = "grid";
             kb.style.display = "none"
             dialog.innerHTML = '<p class="dtext">Player Lost <br> Click To Return</p>';
         }
