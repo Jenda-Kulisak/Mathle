@@ -150,6 +150,8 @@ function Game() {
 
         if (isMobileDevice()) {
             cell.setAttribute('data-mobile-lock', 'true');
+            cell.setAttribute("readonly", true);
+            cell.ariaReadOnly = "true";
         }
 
         grid.appendChild(cell);
