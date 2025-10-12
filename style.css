@@ -160,8 +160,8 @@
     gap: clamp(8px, 2vw, 10px);
     justify-content: center;
     margin: 20px auto;
-    row-gap: clamp(8px, 3vw, 18px);
-    column-gap: clamp(8px, 2.5vw, 18px);
+    row-gap: clamp(6px, 3vw, 18px);
+    column-gap: clamp(6px, 2.5vw, 18px);
     max-width: 80%;
     width: 80%;
   }
@@ -202,13 +202,13 @@
   .cell {
     display: flex;
     transition: transform 0.1s, border 0.1s;
-    width: clamp(35px, 9vw, 60px);
-    height: clamp(35px, 9vw, 60px);
+    width: clamp(42px, 9vw, 60px);
+    height: clamp(42px, 9vw, 60px);
     border: 2px solid rgb(230, 230, 230);
     justify-content: center;
     align-items: center;
-    font-size: clamp(18px, 5vw, 30px);
-    border-radius: 7px;
+    font-size: clamp(21px, 5vw, 30px);
+    border-radius: 9px;
     background-color: rgb(117, 117, 117);
     color: white;
     caret-color: transparent;
