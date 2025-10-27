@@ -147,19 +147,10 @@ function Game() {
             cell.classList.add('locked');
             cell.contentEditable = "false";
         }
-
         if (isMobileDevice()) {
-            cell.setAttribute('data-mobile-lock', 'true');
-            cell.setAttribute("readonly", true);
-            cell.ariaReadOnly = "true";
+            cell.setAttribute("inputmode", "none");
         }
-
         grid.appendChild(cell);
-        cell.addEventListener("focus", e => {
-            if (isMobileDevice()) {
-                e.target.setAttribute('readonly', true);
-            }
-        })
         cell.addEventListener("click", (click) => {
             if (Math.floor(i / cols) != unlockedRow) {
                 click.preventDefault();
@@ -169,12 +160,12 @@ function Game() {
             cell.focus();
         })
         cell.addEventListener("keydown", (e) => {
-            if (isMobileDevice()) {
-                preventDefault()
-                return;
-            }
             const cll = grid.querySelectorAll(".cell")
             e.preventDefault();
+            if (isMobileDevice()) {
+                e.preventDefault();
+                return;
+            }
 
             const forbidden = /^[a-zA-ZěščřžýáíéůúóťďňĺľĚŠČŘŽÝÁÍÉŮÚÓŤĎŇĹĽ'";°¨§,.]$/;
             if (forbidden.test(e.key)) {
