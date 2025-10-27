@@ -3,7 +3,7 @@
   html {
     margin-top: 15px;
   }
-
+  
   #phoneborder {
     position: absolute;
     top: 50%;
@@ -27,7 +27,6 @@
     background-size: cover;
     z-index: -1;
   }
-
   div, button, h1, h2, p {
     position: relative;
     z-index: 100;
@@ -160,8 +159,8 @@
     gap: clamp(8px, 2vw, 10px);
     justify-content: center;
     margin: 20px auto;
-    row-gap: clamp(6px, 3vw, 18px);
-    column-gap: clamp(6px, 2.5vw, 18px);
+    row-gap: clamp(6px, 4vw, 18px);
+    column-gap: clamp(6px, 3vw, 18px);
     max-width: 80%;
     width: 80%;
   }
@@ -202,8 +201,8 @@
   .cell {
     display: flex;
     transition: transform 0.1s, border 0.1s;
-    width: clamp(42px, 9vw, 60px);
-    height: clamp(42px, 9vw, 60px);
+    width: clamp(45px, 9vw, 60px);
+    height: clamp(45px, 9vw, 60px);
     border: 2px solid rgb(230, 230, 230);
     justify-content: center;
     align-items: center;

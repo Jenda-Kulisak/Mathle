@@ -155,7 +155,11 @@ function Game() {
         }
 
         grid.appendChild(cell);
-
+        cell.addEventListener("focus", e => {
+            if (isMobileDevice()) {
+                e.target.setAttribute('readonly', true);
+            }
+        })
         cell.addEventListener("click", (click) => {
             if (Math.floor(i / cols) != unlockedRow) {
                 click.preventDefault();
