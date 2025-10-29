@@ -68,11 +68,11 @@
   }
 
   #popup {
-    font-size: clamp(24px, 5vw, 35px);
+    font-size: clamp(30px, 5vw, 35px);
     outline: none;
     justify-content: center;
-    width: clamp(200px, 80vw, 350px);
-    height: clamp(135px, 8vw, 200px);
+    width: clamp(300px, 80vw, 350px);
+    height: clamp(135px, 20vw, 150px);
     border-radius: 25px;
     margin-top: 15px;
     border: solid rgb(255, 255, 255);
@@ -81,7 +81,7 @@
   }
 
   #popup p {
-    margin-top: -15px;
+    margin-top: -10px;
   }
 
   #custom_game {
