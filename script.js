@@ -129,9 +129,7 @@ function Game() {
     agrid.style.gridTemplateColumns = `repeat(${cols}, clamp(35px, 10vw, 60px))`;
     agrid.style.gridTemplateRows = `repeat(${1}, clamp(35px, 10vw, 60px))`;
     kb.style.gridTemplateColumns = `repeat(${8}, 20px)`;
-    kb.style.gridTemplateRows = `repeat(${1}, 20px)`;
-
-
+    kb.style.gridTemplateRows = `repeat(${3}, 20px)`;
 
     //MAKE JSON --
     //WriteIntoJson()
@@ -209,26 +207,37 @@ function Game() {
 
 
     // keyboard
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 17; i++) {
         let key = document.createElement("div");
         key.classList.add("key");
-        let keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "+", "-", "*", "/", "=", "¶"];
+        let keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "+", "-", "*", "/", "=", "⌫", "↵"];
         key.tabIndex = 0;
         key.contentEditable = "false";
         key.innerText = keyboard[i];
+        if (i == 16) {
+            key.style.gridColumn = "1 / -1";
+            key.style.width = "105%";
+        }
         kb.appendChild(key);
         key.addEventListener("click", (click) => {
             click.preventDefault()
-            if (key.innerText != "¶") {
-                console.log(key.innerText)
+            if (key.innerText != "↵" && key.innerText != "⌫") {
                 cells[activecell].innerText = key.innerText;
             }
-
-            else {
+            else if (key.innerText == "↵") {
                 Enter();
             }
+            else {
+                let it = cells[activecell].innerText;
+                cells[activecell].innerText = "";
+                if (activecell % cols != 0 && it == "") {
+                    cells[activecell - 1].focus()
+                    activecell--;
+                }
+            }
 
-            if ((activecell + 1) % cols != 0 && key.innerText != "¶") {
+            if ((activecell + 1) % cols != 0 && key.innerText != "↵" && key.innerText != "⌫") {
+                cells[activecell + 1].focus();
                 activecell++;
             }
             cells[activecell].focus();
@@ -404,7 +413,7 @@ function Game() {
         dialog.showModal()
         localStorage.setItem("istats", JSON.stringify(istats));
 
-        click = false;
+        let click = false;
         setTimeout(() => {
             click = true;
         }, 1000);
