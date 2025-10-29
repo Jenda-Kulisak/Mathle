@@ -77,7 +77,6 @@
     margin-top: 15px;
     border: solid rgb(255, 255, 255);
     color: rgb(255, 255, 255);
-    background-color: rgb(27, 27, 27);
     overflow: hidden;
   }
 
@@ -267,7 +266,7 @@
     }
   }
 
-  #custom_game, #daily_game, #stats {
+  #custom_game, #daily_game, #stats, #popup {
     transition: 0.5s;
     background: linear-gradient(28deg,rgb(132, 188, 188) 0%, rgba(156, 244, 236, 0.664) 29%, rgba(255, 255, 255, 0.82) 100%);}
 
@@ -280,6 +279,9 @@
 
   .key {
     background: linear-gradient(28deg,rgba(139, 139, 139, 0.803) 0%, rgba(176, 176, 176, 0.781) 40%, rgba(255, 255, 255, 0.759) 100%);}
+
+  #popup {
+    background: linear-gradient(28deg,rgb(119, 168, 168) 0%, rgb(136, 213, 207) 29%, rgb(255, 255, 255) 100%);}
 
     .key:hover {
       scale: 1.1;

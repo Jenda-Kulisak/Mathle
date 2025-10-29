@@ -268,6 +268,7 @@ function Game() {
                         cells[unlockedCells].focus()
                         activecell = unlockedCells;
                     }
+                    unlockedRow++;
                     unlockedCells += 8;
                     reveal();
                 }
@@ -401,9 +402,17 @@ function Game() {
             dialog.innerHTML = '<p class="dtext">Player Lost <br> Click To Return</p>';
         }
         dialog.showModal()
-        localStorage.setItem("istats", JSON.stringify(istats))
+        localStorage.setItem("istats", JSON.stringify(istats));
+
+        click = false;
+        setTimeout(() => {
+            click = true;
+        }, 1000);
+
         window.addEventListener("click", () => {
-            window.location.href = "index.html";
+            if (click) {
+                window.location.href = "index.html";
+            }
         })
     }
     function Generate() {
