@@ -74,7 +74,7 @@
     width: clamp(300px, 80vw, 350px);
     height: clamp(135px, 20vw, 150px);
     border-radius: 25px;
-    margin-top: 15px;
+    margin-top: 70px;
     border: solid rgb(255, 255, 255);
     color: rgb(255, 255, 255);
     overflow: hidden;
@@ -280,7 +280,7 @@
     background: linear-gradient(28deg,rgba(139, 139, 139, 0.803) 0%, rgba(176, 176, 176, 0.781) 40%, rgba(255, 255, 255, 0.759) 100%);}
 
   #popup {
-    background: linear-gradient(28deg,rgb(119, 168, 168) 0%, rgb(136, 213, 207) 29%, rgb(255, 255, 255) 100%);}
+    background: linear-gradient(28deg,rgb(118, 166, 166) 0%, rgb(131, 208, 202) 29%, rgb(234, 234, 234) 100%);}
 
     .key:hover {
       scale: 1.1;

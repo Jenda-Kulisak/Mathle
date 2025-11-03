@@ -382,6 +382,7 @@ function Game() {
             endscreen()
     }
     function endscreen() {
+        gt.style.display = "none";
         mt.style.display = "none";
         agrid.style.display = "none";
         console.log(istats);
@@ -589,7 +590,6 @@ function Game() {
         link.download = "data.json";
         link.click();
         URL.revokeObjectURL(url);
-
     }
 
 }
