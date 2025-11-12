@@ -14,17 +14,18 @@ const istatscreate = {
     completed: 0,
     wins: 0,
     losses: 0,
-    on: [0, 0, 0, 0, 0, 0]
+    on: [0, 0, 0, 0, 0, 0],
+    dailyCompleted: 0,
+    streak: 0,
+    streakDate: 0
 };
 
 let istats = new Object(istatscreate);
 if (localStorage.getItem("istats") != null)
     istats = JSON.parse(localStorage.getItem("istats"));
 
-for (let i = 0; i < 6; i++) {
-    if (istats.on[i] == undefined || istats.on[i] == null)
-        istats.on[i] = 0;
-}
+CheckStats();
+
 
 console.log(istats)
 
@@ -42,7 +43,7 @@ if (todaydate == new Date().toLocaleDateString()) {
     dg.style.opacity = 0.7;
     dg.style.pointerEvents = 'none';
     if (cookiesindividual[0] == "false") {
-        dc.innerText = "Daily Challange Failed";
+        dc.innerText = "Daily Challenge Failed";
         dc.style.textDecoration = "underline";
     }
 }
@@ -111,7 +112,7 @@ function Game() {
                 for (let i = 0; i < answer.length; i++) {
                     stringed = stringed + answer[i];
                 }
-                console.log(answer);
+                //console.log(answer);
                 Ansgrid()
             })
 
@@ -382,6 +383,7 @@ function Game() {
             endscreen()
     }
     function endscreen() {
+        document.body.style.cursor = "pointer";
         gt.style.display = "none";
         mt.style.display = "none";
         agrid.style.display = "none";
@@ -393,7 +395,11 @@ function Game() {
         if (daily) {
             document.cookie = win + " " + new Date().toLocaleDateString();
             console.log(document.cookie)
-
+        }
+        if (win && daily) {
+            istats.streakDate = new Date().toLocaleDateString();
+            istats.streak++;
+            istats.dailyCompleted++;
         }
 
         if (win) {
@@ -554,7 +560,7 @@ function Game() {
         signs.push(stringed)
 
         answer = stringed.split("");
-        console.log(answer);
+        //console.log(answer);
         Ansgrid()
     }
     function WriteIntoJson() {
@@ -592,6 +598,30 @@ function Game() {
         URL.revokeObjectURL(url);
     }
 
+}
+
+function CheckStats() {
+    for (let i = 0; i < 6; i++) {
+        if (istats.on[i] == undefined || istats.on[i] == null)
+            istats.on[i] = 0;
+    }
+    if (istats.dailyCompleted == null)
+        istats.dailyCompleted = 0;
+    if (istats.streak == null)
+        istats.streak = 0;
+    if (istats.streakDate == null)
+        istats.streakDate = 0;
+    let streakDate = new Date(istats.streakDate);
+    let tomorrowOfStreak = new Date(streakDate);
+    tomorrowOfStreak.setDate(streakDate.getDate() + 1);
+    let tomorrowDateString = tomorrowOfStreak.toLocaleDateString();
+    if (istats.streakDate != new Date().toLocaleDateString() && new Date().toLocaleDateString() != tomorrowDateString) {
+        istats.streak = 0;
+        localStorage.setItem("istats", JSON.stringify(istats));
+    }
+
+
+    console.log("stats checked")
 }
 
 function isMobileDevice() {
