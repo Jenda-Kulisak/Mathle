@@ -316,7 +316,9 @@
         }
 
         #gearIcon {
-          display: none;
+          width: 40px;
+          right: 10px;
+          float:right;
         }
         
         #grid, #agrid, #keyboard {
