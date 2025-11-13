@@ -8,7 +8,7 @@ const dc = document.getElementById("daily_completed");
 const stats = document.getElementById("stats");
 const mt = document.getElementById("mathle");
 const agrid = document.getElementById("agrid")
-
+let daily = true;
 
 const istatscreate = {
     completed: 0,
@@ -26,6 +26,17 @@ if (localStorage.getItem("istats") != null)
 
 CheckStats();
 
+let settings = {
+    rows: 6,
+    columns: 8,
+    allowedOperators: ["+", "-", "*", "/"]
+};
+if (localStorage.getItem("settings") != null)
+    settings = JSON.parse(localStorage.getItem("settings"));
+else
+    localStorage.setItem("settings", JSON.stringify(settings));
+
+console.log("settings: " + settings.allowedOperators)
 
 console.log(istats)
 
@@ -51,8 +62,26 @@ stats.addEventListener("click", (click) => {
     window.location.href = "stats.html";
 })
 
-Game()
+
+cg.addEventListener("click", (click) => {
+    daily = false;
+    Game();
+})
+
+dg.addEventListener("click", (click) => {
+    daily = true;
+    Game();
+})
+
+
 function Game() {
+    let rows = 6;
+    let cols = 8;
+    if (!daily) {
+        rows = settings.rows;
+        cols = settings.columns;
+    }
+
 
     let numbers1;
     let numbers2;
@@ -61,7 +90,7 @@ function Game() {
     let word;
     let signs = [];
     let attempt = 0;
-    let unlockedCells = 8;
+    let unlockedCells = cols;
     let unlockedRow = 0;
     let matches = [];
     let win = false;
@@ -69,61 +98,14 @@ function Game() {
     let activecell = 0;
     let stringed = "";
     let answer;
-    let daily = false;
+
+
 
     if (cookiesindividual[0] == "false") {
         dc.style.color = "red";
     }
 
-    cg.addEventListener("click", (click) => {
-        stats.style.display = "none";
-        dc.style.display = "none";
-        grid.style.display = "grid";
-        kb.style.display = "grid";
-        cg.remove()
-        dg.remove()
-        Generate()
-        cells[0].focus();
-        gt.innerText = "Custom Game"
 
-    })
-    dg.addEventListener("click", (click) => {
-
-        stats.style.display = "none";
-        grid.style.display = "grid";
-        kb.style.display = "grid";
-        cg.remove()
-        dg.remove()
-
-        // Target date
-        const targetDate = new Date("2025-09-17");
-
-        const today = new Date();
-        const diffTime = Math.abs(targetDate - today);
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-        console.log("Day no. ", diffDays);
-
-        fetch("data.json")
-            .then(res => res.json())
-            .then(data => {
-
-                answer = data[diffDays];
-                for (let i = 0; i < answer.length; i++) {
-                    stringed = stringed + answer[i];
-                }
-                //console.log(answer);
-                Ansgrid()
-            })
-
-        gt.innerText = `Daily Challenge: ${today.toLocaleDateString()}`
-        daily = true;
-        cells[0].focus();
-
-    })
-
-    const rows = 6;
-    const cols = 8;
 
     grid.style.gridTemplateColumns = `repeat(${cols}, clamp(35px, 10vw, 60px))`;
     grid.style.gridTemplateRows = `repeat(${rows}, clamp(35px, 10vw, 60px))`;
@@ -131,6 +113,7 @@ function Game() {
     agrid.style.gridTemplateRows = `repeat(${1}, clamp(35px, 10vw, 60px))`;
     kb.style.gridTemplateColumns = `repeat(${8}, 20px)`;
     kb.style.gridTemplateRows = `repeat(${3}, 20px)`;
+
 
     //MAKE JSON --
     //WriteIntoJson()
@@ -245,6 +228,55 @@ function Game() {
         })
     }
 
+    if (!daily) {
+        if (isMobileDevice() && settings.columns > 8) {
+            alert("Mobile devices might not be suitable for problems longer than 8 cells")
+        }
+        stats.style.display = "none";
+        dc.style.display = "none";
+        grid.style.display = "grid";
+        kb.style.display = "grid";
+        cg.remove()
+        dg.remove()
+        Generate()
+        cells[0].focus();
+        gt.innerText = "Custom Game"
+    }
+    else {
+        stats.style.display = "none";
+        grid.style.display = "grid";
+        kb.style.display = "grid";
+        cg.remove()
+        dg.remove()
+
+        // Target date
+        const targetDate = new Date("2025-09-17");
+
+        const today = new Date();
+        const diffTime = Math.abs(targetDate - today);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        console.log("Day no. ", diffDays);
+
+        fetch("data.json")
+            .then(res => res.json())
+            .then(data => {
+
+                answer = data[diffDays];
+                for (let i = 0; i < answer.length; i++) {
+                    stringed = stringed + answer[i];
+                }
+                //console.log(answer);
+                Ansgrid()
+            })
+
+        gt.innerText = `Daily Challenge: ${today.toLocaleDateString()}`
+        daily = true;
+        rows = 6;
+        cols = 8;
+        cells[0].focus();
+    }
+
     //answer grid
     function Ansgrid() {
         for (let i = 0; i < cols; i++) {
@@ -279,7 +311,7 @@ function Game() {
                         activecell = unlockedCells;
                     }
                     unlockedRow++;
-                    unlockedCells += 8;
+                    unlockedCells += cols;
                     reveal();
                 }
             }
@@ -432,6 +464,7 @@ function Game() {
         })
     }
     function Generate() {
+        let efficiency = 0;
         while (true) {
             let sucess = false;
 
@@ -489,25 +522,61 @@ function Game() {
             EquasionNumbers--;
             let j = 0;
             while (true) {
-
+                efficiency++;
+                let plus = false;
+                let minus = false;
+                let times = false;
+                let divided = false;
+                settings.allowedOperators.forEach(element => {
+                    if (element == "+")
+                        plus = true;
+                    else if (element == "-")
+                        minus = true;
+                    else if (element == "*")
+                        times = true;
+                    else if (element == "/")
+                        divided = true;
+                });
                 for (let i = 0; i < EquasionNumbers; i++) {
+                    let reset = false;
                     let signtype = getRandomInt(1, 5);
                     let sign;
                     switch (signtype) {
                         case 1:
-                            sign = "+"
+                            if (plus)
+                                sign = "+"
+                            else {
+                                i--;
+                                reset = true;
+                            }
                             break;
                         case 2:
-                            sign = "-"
+                            if (minus)
+                                sign = "-"
+                            else {
+                                i--;
+                                reset = true;
+                            }
                             break;
                         case 3:
-                            sign = "*"
+                            if (times)
+                                sign = "*"
+                            else {
+                                i--;
+                                reset = true;
+                            }
                             break;
                         case 4:
-                            sign = "/";
+                            if (divided)
+                                sign = "/";
+                            else {
+                                i--;
+                                reset = true;
+                            }
                             break;
                     }
-                    signs.push(sign);
+                    if (!reset)
+                        signs.push(sign);
                 }
                 if (numbers3 != 0) {
                     result = eval(`${numbers1}${signs[0]}${numbers2}${signs[1]}${numbers3}`)
@@ -537,7 +606,7 @@ function Game() {
 
                 }
                 j++;
-                if (j == 20) {
+                if (j >= 6) {
                     break;
                 }
             }
@@ -547,8 +616,15 @@ function Game() {
             }
 
 
-            if (sucess)
+            if (sucess) {
+                console.log("Finding valid number took (attempts): " + efficiency)
                 break;
+            }
+            if (efficiency >= 100000) {
+                alert("could not find a suitable excercise, please change the parameters in your settings")
+                window.location.href = "settings.html";
+                break;
+            }
         }
         if (numbers3 != 0) {
             stringed = (`${numbers1}${signs[0]}${numbers2}${signs[1]}${numbers3}`)
@@ -560,7 +636,7 @@ function Game() {
         signs.push(stringed)
 
         answer = stringed.split("");
-        //console.log(answer);
+        console.log(answer);
         Ansgrid()
     }
     function WriteIntoJson() {
