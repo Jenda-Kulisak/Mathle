@@ -191,14 +191,17 @@ function Game() {
 
 
     // keyboard
-    for (let i = 0; i < 17; i++) {
+    let powerenable = 0;
+    if (settings.allowedOperators.includes("^"))
+        powerenable = 1;
+    for (let i = 0; i < 17 + powerenable; i++) {
         let key = document.createElement("div");
         key.classList.add("key");
-        let keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "+", "-", "*", "/", "=", "⌫", "↵"];
+        let keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "+", "-", "*", "/", "=", "⌫", "↵", "^"];
         key.tabIndex = 0;
         key.contentEditable = "false";
         key.innerText = keyboard[i];
-        if (i == 16) {
+        if (i == 16 || i == 17) {
             key.style.gridColumn = "1 / -1";
             key.style.width = "105%";
         }
@@ -527,6 +530,8 @@ function Game() {
                 let minus = false;
                 let times = false;
                 let divided = false;
+                let power = false;
+                let fac = false;
                 settings.allowedOperators.forEach(element => {
                     if (element == "+")
                         plus = true;
@@ -536,10 +541,14 @@ function Game() {
                         times = true;
                     else if (element == "/")
                         divided = true;
+                    else if (element == "^")
+                        power = true;
                 });
+                let powerreset = 0;
                 for (let i = 0; i < EquasionNumbers; i++) {
+                    powerreset++;
                     let reset = false;
-                    let signtype = getRandomInt(1, 5);
+                    let signtype = getRandomInt(1, 6);
                     let sign;
                     switch (signtype) {
                         case 1:
@@ -574,6 +583,18 @@ function Game() {
                                 reset = true;
                             }
                             break;
+                        case 5:
+                            if (power)
+                                sign = "**";
+                            else {
+                                i--;
+                                reset = true;
+                            }
+                            break;
+                    }
+                    if (powerreset > 100) {
+                        window.location.href = "index.html";
+                        break;
                     }
                     if (!reset)
                         signs.push(sign);
@@ -587,6 +608,12 @@ function Game() {
                 let digits = result.toString().length;
                 parseInt(digits);
                 parseInt(result);
+
+                if (signs[0] == "**" && numbers2 > 4 || signs[1] == "**" && numbers3 > 4) {
+                    sucess = false;
+                    break;
+                }
+
                 if (digits == numbersToFill && Number.isInteger(result)) {
                     sucess = true;
                     word = result;
@@ -632,6 +659,9 @@ function Game() {
         else {
             stringed = (`${numbers1}${signs[0]}${numbers2}`)
         }
+        console.log(stringed);
+        stringed = stringed.replace("**", "^");
+        stringed = stringed.replace("**", "^");
         stringed = `${stringed}=${word}`;
         signs.push(stringed)
 
