@@ -1,13 +1,14 @@
 const grid = document.getElementById("grid");
 const kb = document.getElementById("keyboard");
-const dialog = document.getElementById("popup");
 const cg = document.getElementById("custom_game");
 const dg = document.getElementById("daily_game");
 const gt = document.getElementById("game_text");
 const dc = document.getElementById("daily_completed");
 const stats = document.getElementById("stats");
 const mt = document.getElementById("mathle");
-const agrid = document.getElementById("agrid")
+const agrid = document.getElementById("agrid");
+const vb = document.getElementsByClassName("vyber");
+
 let daily = true;
 
 const istatscreate = {
@@ -36,7 +37,6 @@ if (localStorage.getItem("settings") != null)
 else
     localStorage.setItem("settings", JSON.stringify(settings));
 
-console.log("settings: " + settings.allowedOperators)
 
 console.log(istats)
 
@@ -51,7 +51,8 @@ console.log(todaydate + " - " + new Date().toLocaleDateString());
 
 if (todaydate == new Date().toLocaleDateString()) {
     dc.style.display = "block";
-    dg.style.opacity = 0.7;
+    document.getElementById("daily").style.opacity = 0.7;
+    document.getElementById("daily").style.pointerEvents = "none";
     dg.style.pointerEvents = 'none';
     if (cookiesindividual[0] == "false") {
         dc.innerText = "Daily Challenge Failed";
@@ -105,6 +106,9 @@ function Game() {
         dc.style.color = "red";
     }
 
+    for (let i = 0; i < vb.length; i++) {
+        vb[i].style.display = "none";
+    }
 
 
     grid.style.gridTemplateColumns = `repeat(${cols}, clamp(35px, 10vw, 60px))`;
@@ -149,7 +153,7 @@ function Game() {
                 return;
             }
 
-            const forbidden = /^[a-zA-ZěščřžýáíéůúóťďňĺľĚŠČŘŽÝÁÍÉŮÚÓŤĎŇĹĽ'";°¨§,.]$/;
+            const forbidden = /^[a-zA-ZěščřžýáíéůúóťďňĺľĚŠČŘŽÝÁÍÉŮÚÓŤĎŇĹĽ'";°¨§,.% ]$/;
             if (forbidden.test(e.key)) {
                 return;
             }
@@ -178,11 +182,14 @@ function Game() {
             if (e.key === "Backspace") {
                 let it = e.target.innerText;
                 e.target.innerText = "";
-                if (i % cols != 0 && it == "")
+                if (i % cols != 0 && it == "") {
                     cll[i - 1].focus()
+                    activecell = i - 1;
+                }
             }
             else if (((i + 1) % cols != 0 || i == 1)) {
                 cll[i + 1].focus()
+                activecell = i + 1;
             }
             return;
         })
@@ -300,6 +307,8 @@ function Game() {
             for (let i = unlockedCells - cols; i < unlockedCells; i++) {
                 userInput = userInput + cells[i].innerText;
             }
+            userInput = userInput.replace("^", "**");
+            userInput = userInput.replace("^", "**");
             const [s1, s2] = userInput.split("=");
             if (eval(s1) == Number(s2)) {
 
@@ -418,14 +427,20 @@ function Game() {
             endscreen()
     }
     function endscreen() {
+        cells.forEach(cell => {
+            cell.blur();
+        });
         document.body.style.cursor = "pointer";
         gt.style.display = "none";
-        mt.style.display = "none";
+        mt.style.marginTop = "0px";
         agrid.style.display = "none";
         console.log(istats);
         istats.completed++;
         if (win) {
-            istats.on[attempt - 1]++;
+            if (attempt < 6)
+                istats.on[attempt - 1]++;
+            else if (attempt >= 6)
+                istats.on[5]++;
         }
         if (daily) {
             document.cookie = win + " " + new Date().toLocaleDateString();
@@ -440,9 +455,6 @@ function Game() {
         if (win) {
             console.log("WON")
             istats.wins++;
-            dialog.innerHTML = '<p class="dtext">Player Won <br> Click To Return</p>';
-            if (attempt == 1)
-                dialog.style.marginTop = "150px";
             agrid.style.display = "none";
         }
         else {
@@ -450,9 +462,7 @@ function Game() {
             istats.losses++;
             agrid.style.display = "grid";
             kb.style.display = "none"
-            dialog.innerHTML = '<p class="dtext">Player Lost <br> Click To Return</p>';
         }
-        dialog.showModal()
         localStorage.setItem("istats", JSON.stringify(istats));
 
         let click = false;
@@ -659,7 +669,6 @@ function Game() {
         else {
             stringed = (`${numbers1}${signs[0]}${numbers2}`)
         }
-        console.log(stringed);
         stringed = stringed.replace("**", "^");
         stringed = stringed.replace("**", "^");
         stringed = `${stringed}=${word}`;
@@ -717,11 +726,10 @@ function CheckStats() {
         istats.streak = 0;
     if (istats.streakDate == null)
         istats.streakDate = 0;
-    let streakDate = new Date(istats.streakDate);
-    let tomorrowOfStreak = new Date(streakDate);
-    tomorrowOfStreak.setDate(streakDate.getDate() + 1);
+    let tomorrowOfStreak = new Date();
+    tomorrowOfStreak.setDate(tomorrowOfStreak.getDate() - 1);
     let tomorrowDateString = tomorrowOfStreak.toLocaleDateString();
-    if (istats.streakDate != new Date().toLocaleDateString() && new Date().toLocaleDateString() != tomorrowDateString) {
+    if (istats.streakDate != new Date().toLocaleDateString() && tomorrowDateString != istats.streakDate) {
         istats.streak = 0;
         localStorage.setItem("istats", JSON.stringify(istats));
     }

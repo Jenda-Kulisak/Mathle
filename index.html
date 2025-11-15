@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Mathle</title>
+  <title>Mathle - A Daily Puzzle Game</title>
   <link rel="icon" type="image/png" href="mathle-logo.png">
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -12,24 +12,38 @@
 
 <body>
   <img id="background" src="bcg.jpg">
-  <div style="position: relative; max-width: 800px; margin: auto;">
-    <h1 id="mathle" style="margin-top: -25px;">Mathle</h1>
-    <a href="settings.html">
-      <img src="gear-icon.png" id="gearIcon">
+  <div id="top" style="max-width: 620px; margin: auto; text-align: center;">
+    <h1 id="mathle" style=" margin: auto; margin-top: -25px;">Mathle</h1>
+    <a href="info.html">
+    <img src="info.png" id="info">
     </a>
   </div>
   <h2 id="daily_completed"  style = "color: rgb(43, 167, 43); display: none"><u>Daily Challenge Completed!</u></h2>
       <h2 id="game_text" style="margin-top: -10px;"></h2>
 
   <div id="gameBox">
-    <button id="daily_game">Daily game</button>
-    <button id="custom_game">Custom game</button>
+    <div id="daily" class="vyber">
+      <img src="calendar.svg" style="height: 80px; margin-top: 30px; margin-bottom: -30px;">
+      <h3> Daily Game</h3>
+      <p>Play to increase your streak</p>
+      <p>One equation per day</p>
+      <button id="daily_game">Play Daily game</button>
+    </div>
+    <div id="custom" class="vyber" style="margin-left: 15px;">
+      <a href="settings.html">
+        <img src="gear-icon.png" class="gearIcon" style="width: 80px; height: 80px; margin-top: 30px; margin-bottom: -30px;">
+      </a>
+      <h3> Custom Game</h3>
+      <p>Customize your experience</p>
+      <p>Unlimited games</p>
+      <button id="custom_game">Play Custom game</button>
+    </div>
+    
   </div>
   <button id="stats">Stats</button>
   <div id="grid"></div>
   <div id="agrid"></div>
   <div id="keyboard"></div>
-  <dialog id="popup"></dialog>
 
   <script src="script.js"></script>
 </body>

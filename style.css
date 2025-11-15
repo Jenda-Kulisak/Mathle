@@ -4,9 +4,12 @@
     margin-top: 15px;
   }
 
+  #mathle {
+    font-size: 40px;
+  }
 
   #background {
-    animation: bcground 30s ease-in-out infinite;
+    animation: bcground 60s ease-in-out infinite;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -46,18 +49,30 @@
     box-sizing: border-box;
   }
 
-  #gearIcon {
-    position: absolute;
-    margin-top: -55px;
-    right: clamp(30px, 10vw, 100px);
-    max-width: 50px;
+  .gearIcon {
+
+    width: 50px;
     cursor: pointer;
-    z-index: 101;
     transition: transform 0.2s;
   }
   
-  #gearIcon:hover {
+  .gearIcon:hover {
     transform: rotate(90deg) scale(1.1);
+  }
+
+  #info {
+    position: absolute;
+    margin-top: -50px;
+    right: 0px;
+    width: 50px;
+    cursor: pointer;
+    z-index: 101;
+    transition: 0.2s;
+  }
+  
+  #info:hover {
+    rotate:20deg;
+    transform: scale(1.15);
   }
 
 
@@ -80,73 +95,51 @@
   }
 
 
-  #popup {
-    font-size: clamp(30px, 5vw, 35px);
-    outline: none;
-    justify-content: center;
-    width: clamp(300px, 80vw, 350px);
-    height: clamp(135px, 20vw, 150px);
-    border-radius: 25px;
-    margin-top: 70px;
-    border: solid rgb(255, 255, 255);
-    color: rgb(255, 255, 255);
-    overflow: hidden;
-  }
-
-  #popup p {
-    margin-top: -10px;
-  }
-
-  #custom_game {
-    margin: 5px;
-    margin-top: 10px;
-    border: 1px solid rgb(223, 223, 223);
-    width: clamp(200px, 40vw, 300px);
-    height: clamp(280px, 50vw, 400px);
-    font-size: clamp(24px, 5vw, 35px);
-    color: white;
-    justify-content: center;
-    border-radius: 20px;
-    display: inline-block;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-  }
 
   #custom_game:hover, #daily_game:hover {
     transform: scale(1.025);
     border: 3px solid white;
   }
   #custom_game:hover {
-    rotate: 2deg;
+    rotate: -1deg;
   }
   #daily_game:hover {
-    rotate: -2deg;
+    rotate: 1deg;
   }
 
-  #daily_game {
+  #daily_game, #custom_game {
     display: inline-block;
+    margin-top: 20px;
     border: 1px solid rgb(223, 223, 223);
-    margin-top: 0px;
-    width: clamp(200px, 40vw, 300px);
-    height: clamp(280px, 50vw, 400px);
+    width: 280px;
+    height: 80px;
+    font-size: 26px;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+
+  .vyber {
+    display: inline-block;
+    margin-top: 20px;
+    border: 1px solid rgb(223, 223, 223);
+    width: 300px;
+    height: 400px;
     font-size: clamp(24px, 5vw, 35px);
     color: white;
-    justify-content: center;
     border-radius: 20px;
     cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
   }
+
 
   #stats {
     margin: auto;
     border: 1px solid rgb(223, 223, 223);
     position: flex;
     margin-top: 20px;
-    width: clamp(400px, 80vw, 610px);
-    height: clamp(70px, 12vw, 100px);
-    font-size: clamp(28px, 5vw, 40px);
+    width: clamp(350px, 60vw, 500px);
+    height: clamp(70px, 12vw, 90px);
+    font-size: clamp(32px, 5vw, 40px);
     color: white;
     justify-content: center;
     background-color: #121212;
@@ -254,7 +247,7 @@
     pointer-events: none;
     opacity: 1;
     border: 2px solid white;
-    animation: winamination 1.5s infinite;
+    animation: winanimation 1.5s infinite;
   }
 
   @keyframes bcground {
@@ -266,7 +259,7 @@
     }
   }
 
-  @keyframes winamination {
+  @keyframes winanimation {
     0%, 100% {
       transform: rotate(5deg) scale(1.025);
     }
@@ -287,22 +280,70 @@
     }
   }
 
-  #custom_game, #daily_game, #stats, #popup {
+  #custom_game, #daily_game, #stats {
+    transition: 0.3s;
+    background: linear-gradient(28deg,rgba(121, 255, 255, 0.4) 0%, rgba(180, 255, 249, 0.4) 29%, rgba(255, 255, 255, 0.4) 100%);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
+  }
+  th, td {
+    transition: 0.3s;
+    background: linear-gradient(28deg,rgba(194, 194, 194, 0.5) 0%, rgba(230, 230, 230, 0.5) 29%, rgba(255, 255, 255, 0.6) 100%);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
+  }
+
+
+
+  .vyber, .settings, input {
+    transition: 0.3s;
+    background: linear-gradient(28deg,rgba(174, 248, 255, 0.4) 0%, rgba(192, 248, 255, 0.4) 29%, rgba(255, 255, 255, 0.4) 100%);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
+  }
+
+  input:hover, #save:hover {
+    transition: 0.05s;
+    transform: scale(1.0);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+  }
+
+  .vyber p {
+    line-height: 10px;
+    font-size: 20px;
+  }
+
+  .vyber h1
+  {
+    margin-top: 20px;
+    margin-bottom: -20px;
+  }
+
+  #custom_game:hover, #daily_game:hover, #stats:hover, .vyber:hover {
     transition: 0.4s;
-    background: linear-gradient(28deg,rgb(142, 202, 202) 0%, rgba(165, 255, 247, 0.664) 29%, rgba(255, 255, 255, 0.82) 100%);}
+    transform: scale(1.03);
+    background: linear-gradient(28deg,rgba(96, 255, 255, 0.5) 0%, rgba(152, 255, 246, 0.5) 29%, rgba(255, 255, 255, 0.5) 100%);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.7);
 
-  #custom_game:hover, #daily_game:hover, #stats:hover {
-    transition: 0.4s;
-    background: linear-gradient(28deg,rgba(130, 229, 229, 0.66) 0%, rgba(113, 215, 207, 0.825) 29%, rgb(255, 255, 255) 100%);}
+  }
 
-  .cell, th, td {
-    background: linear-gradient(28deg,rgb(139, 139, 139) 0%, rgb(176, 176, 176) 40%, rgba(255, 255, 255, 0.811) 100%);}
-
-  .key {
-    background: linear-gradient(28deg,rgba(139, 139, 139, 0.803) 0%, rgba(176, 176, 176, 0.781) 40%, rgba(255, 255, 255, 0.759) 100%);}
 
   #popup {
-    background: linear-gradient(28deg,rgb(118, 166, 166) 0%, rgb(131, 208, 202) 29%, rgb(234, 234, 234) 100%);}
+    transition: 0.3s;
+    background: linear-gradient(28deg,rgba(139, 139, 139, 0.803) 0%, rgba(176, 176, 176, 0.781) 40%, rgba(255, 255, 255, 0.759) 100%);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
+  }
+  
+
+  .key, .cell {
+    background: linear-gradient(28deg,rgba(139, 139, 139, 0.803) 0%, rgba(176, 176, 176, 0.781) 40%, rgba(255, 255, 255, 0.759) 100%);}
 
     .key:hover {
       transition: 0.2s;
@@ -315,15 +356,21 @@
           padding: 10px 5px;
         }
 
-        #gearIcon {
-          width: 40px;
-          right: 10px;
-          float:right;
+
+        #info {
+          float: right;
         }
         
         #grid, #agrid, #keyboard {
           margin: 15px auto;
           padding: 0 2px;
+        }
+      }
+
+      @media (max-width: 640px)
+      {
+        #custom  {
+          margin-right: 15px;
         }
       }
 
@@ -337,7 +384,6 @@
   .settings {
     margin: auto;
     margin-top: 10px;
-    background: rgba(255, 255, 255, 0.8);
     color: black;
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -366,6 +412,11 @@
     font-size: 1rem;
   }
 
+  input {
+    border-radius: 5px;
+    outline: none;
+  }
+
   .operators {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -384,13 +435,61 @@
     padding: 0.6rem;
     border: none;
     border-radius: 0.5rem;
+    border: 1px solid white;
     background: #0077ff;
     color: white;
     font-weight: bold;
     cursor: pointer;
     transition: 0.2s;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
   }
 
-  button:hover {
-    background: #005fd4;
+
+
+
+  #barholder {
+    margin-top: 200px;
+    margin: auto;
+    border-radius: 12px;
+    max-width: 350px;
+    transition: 0.3s;
+    background: linear-gradient(28deg,rgba(194, 194, 194, 0.5) 0%, rgba(230, 230, 230, 0.5) 29%, rgba(255, 255, 255, 0.6) 100%);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
+  }
+
+  .guess-row {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    gap: 10px;
+  }
+  
+  .label {
+    margin-left: 20px;
+    font-size: 24px;
+  }
+  
+  .bar {
+    border: 2px solid white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 30px;
+    width: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .fill {
+    height: 100%;
+    width: 0px;
+    background: #90d4d7;
+    border-radius: 8px;
+    transition: width 0.4s ease;
+  }
+
+  .number {
+    font-size: 24px;
+    margin-right: 10px;
   }
