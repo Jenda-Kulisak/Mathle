@@ -7,11 +7,25 @@
     "**/Thumbs.db": true,
     "license.md": true,
     ".github": true,
-    ".vscode": true
+    ".vscode": true,
+    "bar.png": true,
+    "bcg.jpg": true,
+    "calendar.svg": true,
+    "gear-icon.png": true,
+    "info.png": true,
+    "mathle-logo.png": true,
+    "Preview.png": true
   },
   "hide-files.files": [
     "license.md",
     ".github",
-    ".vscode"
+    ".vscode",
+    "bar.png",
+    "bcg.jpg",
+    "calendar.svg",
+    "gear-icon.png",
+    "info.png",
+    "mathle-logo.png",
+    "Preview.png"
   ]
 }
