@@ -8,7 +8,6 @@ const stats = document.getElementById("stats");
 const mt = document.getElementById("mathle");
 const agrid = document.getElementById("agrid");
 const vb = document.getElementsByClassName("vyber");
-
 let daily = true;
 
 const istatscreate = {
@@ -18,7 +17,8 @@ const istatscreate = {
     on: [0, 0, 0, 0, 0, 0],
     dailyCompleted: 0,
     streak: 0,
-    streakDate: 0
+    streakDate: 0,
+    maxStreak: 0
 };
 
 let istats = new Object(istatscreate);
@@ -37,24 +37,30 @@ if (localStorage.getItem("settings") != null)
 else
     localStorage.setItem("settings", JSON.stringify(settings));
 
-
 console.log(istats)
+
+let daily_play = {
+    date: 0,
+    status: ""
+}
+
+if (localStorage.getItem("daily_play") != null)
+    daily_play = JSON.parse(localStorage.getItem("daily_play"));
 
 kb.style.display = "none";
 grid.style.display = "none";
-let cookies = document.cookie;
-let cookiesindividual = cookies.split(" ", 1)
-let todaydate = cookies.split(cookiesindividual[0] + " ")[1]
 
-console.log(todaydate + " - " + new Date().toLocaleDateString());
+console.log(daily_play.date + " - " + new Date().toLocaleDateString());
 
 
-if (todaydate == new Date().toLocaleDateString()) {
+if (daily_play.date == new Date().toLocaleDateString()) {
     dc.style.display = "block";
-    document.getElementById("daily").style.opacity = 0.7;
-    document.getElementById("daily").style.pointerEvents = "none";
+    dg.style.opacity = 0.7;
     dg.style.pointerEvents = 'none';
-    if (cookiesindividual[0] == "false") {
+    document.getElementById("calendar").pointerEvents = "mousedown";
+    console.log(daily_play.status)
+    if (daily_play.status == false) {
+        dc.style.color = "red";
         dc.innerText = "Daily Challenge Failed";
         dc.style.textDecoration = "underline";
     }
@@ -99,12 +105,6 @@ function Game() {
     let activecell = 0;
     let stringed = "";
     let answer;
-
-
-
-    if (cookiesindividual[0] == "false") {
-        dc.style.color = "red";
-    }
 
     for (let i = 0; i < vb.length; i++) {
         vb[i].style.display = "none";
@@ -259,7 +259,6 @@ function Game() {
         cg.remove()
         dg.remove()
 
-        // Target date
         const targetDate = new Date("2025-09-17");
 
         const today = new Date();
@@ -307,8 +306,8 @@ function Game() {
             for (let i = unlockedCells - cols; i < unlockedCells; i++) {
                 userInput = userInput + cells[i].innerText;
             }
-            userInput = userInput.replace("^", "**");
-            userInput = userInput.replace("^", "**");
+            userInput = userInput.replaceAll("^", "**");
+            console.log(userInput);
             const [s1, s2] = userInput.split("=");
             if (eval(s1) == Number(s2)) {
 
@@ -443,12 +442,16 @@ function Game() {
                 istats.on[5]++;
         }
         if (daily) {
-            document.cookie = win + " " + new Date().toLocaleDateString();
+            daily_play.date = new Date().toLocaleDateString();
+            daily_play.status = win;
+            localStorage.setItem("daily_play", JSON.stringify(daily_play));
             console.log(document.cookie)
         }
         if (win && daily) {
             istats.streakDate = new Date().toLocaleDateString();
             istats.streak++;
+            if (istats.streak > istats.maxStreak)
+                istats.maxStreak = istats.streak;
             istats.dailyCompleted++;
         }
 
@@ -459,6 +462,7 @@ function Game() {
         }
         else {
             console.log("LOST")
+            istats.streak = 0;
             istats.losses++;
             agrid.style.display = "grid";
             kb.style.display = "none"
@@ -619,7 +623,7 @@ function Game() {
                 parseInt(digits);
                 parseInt(result);
 
-                if (signs[0] == "**" && numbers2 > 4 || signs[1] == "**" && numbers3 > 4) {
+                if (signs[0] == "**" && numbers2 > 4 || signs[1] == "**" && numbers3 > 4 || result > 10000) {
                     sucess = false;
                     break;
                 }
@@ -657,7 +661,7 @@ function Game() {
                 console.log("Finding valid number took (attempts): " + efficiency)
                 break;
             }
-            if (efficiency >= 100000) {
+            if (efficiency >= 20000) {
                 alert("could not find a suitable excercise, please change the parameters in your settings")
                 window.location.href = "settings.html";
                 break;
@@ -669,8 +673,7 @@ function Game() {
         else {
             stringed = (`${numbers1}${signs[0]}${numbers2}`)
         }
-        stringed = stringed.replace("**", "^");
-        stringed = stringed.replace("**", "^");
+        stringed = stringed.replaceAll("**", "^");
         stringed = `${stringed}=${word}`;
         signs.push(stringed)
 
@@ -726,6 +729,9 @@ function CheckStats() {
         istats.streak = 0;
     if (istats.streakDate == null)
         istats.streakDate = 0;
+    if (istats.maxStreak == null)
+        istats.maxStreak = 0;
+
     let tomorrowOfStreak = new Date();
     tomorrowOfStreak.setDate(tomorrowOfStreak.getDate() - 1);
     let tomorrowDateString = tomorrowOfStreak.toLocaleDateString();
